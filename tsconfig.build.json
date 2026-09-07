@@ -1,0 +1,24 @@
+{
+  // Build config used by the `prepare` script to emit compiled JS + typings
+  // alongside the sources (same flat layout the published npm package uses).
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "noEmitOnError": false,
+    "noUnusedLocals": false,
+    "noUnusedParameters": false,
+    "skipLibCheck": true,
+    // Don't auto-include ambient @types (e.g. a too-new @types/node that the
+    // pinned TS version can't parse); the library only needs types it imports.
+    "types": []
+  },
+  "include": ["src/**/*"],
+  "exclude": [
+    "node_modules",
+    "testUtils",
+    "**/*.spec.*",
+    "**/*.driver.*",
+    "**/*.test.*",
+    "**/__tests__/**",
+    "**/*.perf.*"
+  ]
+}

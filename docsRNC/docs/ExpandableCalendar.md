@@ -65,3 +65,18 @@ The threshold for closing the calendar with the pan gesture
 
 Whether to close the calendar on day press  
 <span style={{color: 'grey'}}>boolean</span>
+
+### enableDayDrag
+
+Enable long-press-then-drag of a day onto another day, in both the open (month) and closed (week) positions. Works only for the default day rendering (not for markingType='period' or a custom dayComponent). Default = false  
+<span style={{color: 'grey'}}>boolean</span>
+
+### onDayDragStart
+
+Called once the long-press is recognized and the drag begins, with the dragged day  
+<span style={{color: 'grey'}}>(date: DateData) => void</span>
+
+### onDayDragEnd
+
+Called when a day is dropped on a different day, with `data.from` and `data.to` (both DateData). Callback only - the component does not mutate markedDates or selection; update your own state here  
+<span style={{color: 'grey'}}>(data: DayDragEndData) => void</span>

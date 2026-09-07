@@ -70,6 +70,22 @@
       "type": "boolean",
       "description": "Whether to close the calendar on day press",
       "default": "true"
+    },
+    {
+      "name": "enableDayDrag",
+      "type": "boolean",
+      "description": "Enable long-press-then-drag of a day onto another day, in both the open (month) and closed (week) positions. Works only for the default day rendering (not for markingType='period' or a custom dayComponent). Default = false",
+      "default": "false"
+    },
+    {
+      "name": "onDayDragStart",
+      "type": "(date: DateData) => void",
+      "description": "Called once the long-press is recognized and the drag begins, with the dragged day"
+    },
+    {
+      "name": "onDayDragEnd",
+      "type": "(data: DayDragEndData) => void",
+      "description": "Called when a day is dropped on a different day, with `data.from` and `data.to` (both DateData). Callback only - the component does not mutate markedDates or selection; update your own state here"
     }
   ]
 }

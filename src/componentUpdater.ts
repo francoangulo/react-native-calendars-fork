@@ -66,7 +66,14 @@ export function extractDayProps(props: CalendarProps) {
     date,
     disableAllTouchEventsForDisabledDays,
     disableAllTouchEventsForInactiveDays,
-    dayComponent
+    dayComponent,
+    enableDayDrag,
+    dragHoverDate,
+    onDragStart,
+    onDragMove,
+    onDragEnd,
+    onDayLayout,
+    onDayViewRef
   } = props;
 
   const dayProps = {
@@ -79,7 +86,14 @@ export function extractDayProps(props: CalendarProps) {
     date,
     disableAllTouchEventsForDisabledDays,
     disableAllTouchEventsForInactiveDays,
-    dayComponent
+    dayComponent,
+    enableDayDrag,
+    dragHoverDate,
+    onDragStart,
+    onDragMove,
+    onDragEnd,
+    onDayLayout,
+    onDayViewRef
   };
 
   return dayProps;

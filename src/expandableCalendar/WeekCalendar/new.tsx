@@ -78,12 +78,34 @@ const WeekCalendar = (props: WeekCalendarProps) => {
     (_type: any, item: string) => {
       const {allowShadow, ...calendarListProps} = props;
       const {/* style,  */ ...others} = extractCalendarProps(calendarListProps);
+      const {
+        enableDayDrag,
+        onDragStart,
+        onDragMove,
+        onDragEnd,
+        onDayLayout,
+        onDayViewRef,
+        ...weekOthers
+      } = others as typeof others & {
+        enableDayDrag?: boolean;
+        onDragStart?: (...args: any[]) => void;
+        onDragMove?: (...args: any[]) => void;
+        onDragEnd?: (...args: any[]) => void;
+        onDayLayout?: (...args: any[]) => void;
+        onDayViewRef?: (...args: any[]) => void;
+      };
 
       const isSameWeek = sameWeek(item, date, firstDay);
 
       return (
         <Week
-          {...others}
+          {...weekOthers}
+          enableDayDrag={!!enableDayDrag && isSameWeek}
+          onDragStart={isSameWeek ? onDragStart : undefined}
+          onDragMove={isSameWeek ? onDragMove : undefined}
+          onDragEnd={isSameWeek ? onDragEnd : undefined}
+          onDayLayout={isSameWeek ? onDayLayout : undefined}
+          onDayViewRef={isSameWeek ? onDayViewRef : undefined}
           key={item}
           current={isSameWeek ? date : item}
           firstDay={firstDay}
@@ -94,7 +116,7 @@ const WeekCalendar = (props: WeekCalendarProps) => {
         />
       );
     },
-    [date, markedDates]
+    [date, markedDates, firstDay, weekStyle, onDayPress, props, context]
   );
 
   return (

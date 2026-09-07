@@ -66,4 +66,15 @@ ios/Pods
 ios/Podfile.lock
 
 .eslintcache
-.reassure 
+.reassure
+
+# Compiled output from the `prepare` / `build:lib` script (tsconfig.build.json).
+# Emitted in place next to the sources so the flat src/ layout + .png assets
+# still resolve after packing; .npmignore strips the .ts/.tsx on publish/pack.
+src/**/*.js
+src/**/*.d.ts
+!src/**/*.spec.js
+!src/**/*.driver.js
+!src/**/*.perf.js
+!src/testIDs.js
+!src/testUtils.js 

@@ -63,6 +63,17 @@ const ExpandableCalendarScreen = (props: Props) => {
           markedDates={marked.current}
           leftArrowImageSource={leftArrowIcon}
           rightArrowImageSource={rightArrowIcon}
+          // Long-press a day, then drag it onto another day (works open and closed)
+          enableDayDrag
+          // Called when the drag begins (after the long-press is recognized)
+          onDayDragStart={date => {
+            console.log('onDayDragStart: ', date.dateString);
+          }}
+          // Called when a day is dropped on a different day. Callback only - update
+          // your own state (e.g. move a marking / reschedule an item) from here.
+          onDayDragEnd={({from, to}) => {
+            console.warn('day drag', from.dateString, '→', to.dateString);
+          }}
           // animateScroll
           // closeOnDayPress={false}
         />

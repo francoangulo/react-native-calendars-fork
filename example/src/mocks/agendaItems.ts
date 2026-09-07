@@ -124,11 +124,11 @@ export function getMarkedDates() {
   const marked: MarkedDate = {};
 
   agendaItems.forEach(item => {
-    // NOTE: only mark dates with data
+    // Only mark dates that have real agenda data.
+    // Empty stubs must not set `disabled` — that grays the day and breaks drag/touch
+    // when the week overlay sits above the month grid.
     if (item.data && item.data.length > 0 && !isEmpty(item.data[0])) {
       marked[item.title] = {marked: true};
-    } else {
-      marked[item.title] = {disabled: true};
     }
   });
   return marked;

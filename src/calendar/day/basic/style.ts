@@ -15,6 +15,12 @@ export default function styleConstructor(theme: Theme = {}) {
       height: 32,
       alignItems: 'center'
     },
+    dragHitArea: {
+      width: '100%',
+      alignItems: 'center',
+      justifyContent: 'center',
+      minHeight: 32
+    },
     text: {
       marginTop: constants.isAndroid ? 4 : 6,
       fontSize: appStyle.textDayFontSize,
@@ -29,6 +35,11 @@ export default function styleConstructor(theme: Theme = {}) {
     },
     selected: {
       backgroundColor: appStyle.selectedDayBackgroundColor,
+      borderRadius: 16
+    },
+    dragHover: {
+      borderWidth: 2,
+      borderColor: appStyle.selectedDayBackgroundColor,
       borderRadius: 16
     },
     today: {

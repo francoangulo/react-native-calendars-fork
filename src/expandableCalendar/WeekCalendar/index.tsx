@@ -139,13 +139,37 @@ class WeekCalendar extends Component<WeekCalendarProps, State> {
   renderItem = ({item}: any) => {
     const {allowShadow, context, ...calendarListProps} = this.props;
     const {style, onDayPress = this.onDayPress, firstDay = 0, ...others} = extractCalendarProps(calendarListProps);
+    const {
+      enableDayDrag,
+      onDragStart,
+      onDragMove,
+      onDragEnd,
+      onDayLayout,
+      onDayViewRef,
+      ...weekOthers
+    } = others as typeof others & {
+      enableDayDrag?: boolean;
+      onDragStart?: (...args: any[]) => void;
+      onDragMove?: (...args: any[]) => void;
+      onDragEnd?: (...args: any[]) => void;
+      onDayLayout?: (...args: any[]) => void;
+      onDayViewRef?: (...args: any[]) => void;
+    };
 
     const isSameWeek = sameWeek(item, context.date, firstDay);
     const currentContext = isSameWeek ? context : undefined;
 
     return (
       <Week
-        {...others}
+        {...weekOthers}
+        // Only the visible week page may start a drag — adjacent pages stay mounted
+        // in the FlatList and share the same weekday columns on screen width.
+        enableDayDrag={!!enableDayDrag && isSameWeek}
+        onDragStart={isSameWeek ? onDragStart : undefined}
+        onDragMove={isSameWeek ? onDragMove : undefined}
+        onDragEnd={isSameWeek ? onDragEnd : undefined}
+        onDayLayout={isSameWeek ? onDayLayout : undefined}
+        onDayViewRef={isSameWeek ? onDayViewRef : undefined}
         key={item}
         current={item}
         firstDay={firstDay}
@@ -178,7 +202,7 @@ class WeekCalendar extends Component<WeekCalendarProps, State> {
   };
 
   render() {
-    const {allowShadow, firstDay, hideDayNames, current, context} = this.props;
+    const {allowShadow, firstDay, hideDayNames, current, context, scrollEnabled = true} = this.props;
     const {items} = this.state;
     const extraData = Map({
       current,
@@ -205,7 +229,7 @@ class WeekCalendar extends Component<WeekCalendarProps, State> {
           horizontal
           showsHorizontalScrollIndicator={false}
           pagingEnabled
-          scrollEnabled
+          scrollEnabled={scrollEnabled}
           renderItem={this.renderItem}
           keyExtractor={this.keyExtractor}
           initialScrollIndex={NUMBER_OF_PAGES}

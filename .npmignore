@@ -258,8 +258,9 @@ docsRNC/
 scripts/
 
 # Typescript
-# ignore the .ts files
-*.ts
-*.tsx
-# include the .d.ts files
-!*.d.ts 
+# NOTE: unlike upstream, this fork ships the .ts/.tsx sources too, so a plain
+# git install works even if the `prepare` build step is skipped by the consumer's
+# package manager. Metro/Babel in the consuming RN app transpiles them.
+!*.ts
+!*.tsx
+!*.d.ts
